@@ -1,0 +1,24 @@
+
+sr: 22050
+max_context_len: 30
+device: 'mps'
+hop_size: 256
+overlap_frame_len: 16
+dtype: 'float32'
+intelligebility_cfg_rate: 0.7
+similarity_cfg_rate: 0.7
+diff_step: 30
+target_audio_path: 'Data/bamboo_ref.wav'
+
+default:
+  repo_id: "Plachta/Seed-VC"
+  CFM_CHECKPOINT: "v2/cfm_small.pth"
+  AR_CHECKPOINT: "v2/ar_base.pth"
+
+CE:
+  repo_id: "Plachta/ASTRAL-quantization"
+  wide_checkpoint: "bsq2048/bsq2048_light.pth"
+
+SE:
+  repo_id: "funasr/campplus"
+  checkpoint: "campplus_cn_common.bin"

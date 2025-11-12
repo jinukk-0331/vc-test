@@ -1,0 +1,20 @@
+_target_: modules.astral_quantization.default_model.AstralQuantizer
+tokenizer_name: "openai/whisper-small"
+ssl_model_name: "facebook/hubert-large-ll60k"
+ssl_output_layer: 18
+encoder: &bottleneck_encoder
+  _target_: modules.astral_quantization.convnext.ConvNeXtV2Stage
+  dim: 512
+  num_blocks: 12
+  intermediate_dim: 1536
+  dilation: 1
+  input_dim: 1024
+quantizer:
+  _target_: modules.astral_quantization.bsq.BinarySphericalQuantize
+  codebook_size: 2048  # codebook size, must be a power of 2
+  dim: 512
+  entropy_loss_weight: 0.1
+  diversity_gamma: 1.0
+  spherical: True
+  enable_entropy_loss: True
+  soft_entropy_loss: True
